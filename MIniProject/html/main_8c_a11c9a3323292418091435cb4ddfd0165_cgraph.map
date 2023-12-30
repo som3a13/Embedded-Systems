@@ -1,0 +1,10 @@
+<map id="stateAction" name="stateAction">
+<area shape="rect" id="node1" title="Performs actions based on the system state." alt="" coords="5,56,101,83"/>
+<area shape="rect" id="node2" href="$main_8c.html#ab3002fe8e0074c9e2ecb5b835e5e819f" title="Displays the main menu and handles user input." alt="" coords="158,31,249,57"/>
+<area shape="rect" id="node3" href="$main_8c.html#a32371c9d181667ed4468527479b200b6" title="Displays the sensors menu and handles user input for sensor&#45;related actions." alt="" coords="149,81,257,108"/>
+<area shape="rect" id="node4" href="$main_8c.html#ac40dbc90d8db9b5e32b6862dda69fee4" title="Displays sensor values based on the system state." alt="" coords="311,5,403,32"/>
+<area shape="rect" id="node6" href="$main_8c.html#a6f04bc68a4def1d7b022a02dfa844457" title="Sets the room temperature and returns the state of the AC system." alt="" coords="305,56,408,83"/>
+<area shape="rect" id="node7" href="$main_8c.html#a04ce8ce8148209d4f10241da04cd6edc" title="Sets the engine temperature and returns the state of the engine temperature controller." alt="" coords="306,107,407,133"/>
+<area shape="rect" id="node8" href="$main_8c.html#a2899e6add29016990141654e259d3b2d" title="Sets the traffic light color." alt="" coords="316,157,397,184"/>
+<area shape="rect" id="node5" href="$main_8c.html#a439d8d8270a47e1fde0102011196e7b1" title="Determine the speed of the vehicle based on the traffic light color." alt="" coords="456,5,564,32"/>
+</map>
