@@ -2,229 +2,328 @@
 #include <stdio.h>
 #include "prototypes.h"
 
-typedef char (*funPTR)(Traffic *);
-
-SystemState systemState={OFF,RED,OFF,35,
-#if WITH_ENGINE_TEMP_CONTROLLER 
-OFF ,
-140
+/**
+ * @brief System state representing the overall state of the vehicle system.
+ *
+ * Initial values are set for systemState based on configuration options.
+ */
+SystemState systemState = {
+    OFF, RED, OFF, 35,
+#if WITH_ENGINE_TEMP_CONTROLLER
+    OFF, 140
 #endif
-}; 
+};
 
-int main(void) {
-    
+SystemState *ptr = &systemState; /**< Pointer to the system state structure. */
+
+/**
+ * @brief Entry point of the program.
+ *
+ * Calls the main menu function and returns 0 upon completion.
+ *
+ * @return 0 upon successful execution.
+ */
+int main(void)
+{
     mainMenu();
     return 0;
 }
 
-void mainMenu() {
+/**
+ * @brief Displays the main menu and handles user input.
+ *
+ * The main menu provides options to turn on/off the vehicle engine or quit the system.
+ * Upon user input, appropriate actions are taken.
+ */
+void mainMenu()
+{
     printf("a. Turn on the vehicle engine\n");
     printf("b. Turn off the vehicle engine\n");
     printf("c. Quit the system\n\n");
-    
-    while (1) {
-        printf("Enter your choice: ");
-        scanf(" %c", &systemState.userInput);
 
-        if (systemState.userInput == 'a' || systemState.userInput == 'A' ||
-            systemState.userInput == 'b' || systemState.userInput == 'B' ||
-            systemState.userInput == 'c' || systemState.userInput == 'C') {
+    while (1)
+    {
+        printf("Enter your choice: ");
+        scanf(" %c", &ptr->userInput);
+
+        if (ptr->userInput == 'a' || ptr->userInput == 'A' ||
+            ptr->userInput == 'b' || ptr->userInput == 'B' ||
+            ptr->userInput == 'c' || ptr->userInput == 'C')
+        {
             break;
-        } else {
+        }
+        else
+        {
             printf("Invalid option. Please enter a valid option.\n");
         }
     }
 
-    switch (systemState.userInput) {
-        case 'a':
-        case 'A':
-            systemState.vehicleState = RUNNING;
-            stateAction();
-            break;
-        case 'b':
-        case 'B':
-            systemState.vehicleState = OFF;
-            stateAction();
-            break;
-        case 'c':
-        case 'C':
-            printf("System is Shutting down..\n");
-            break;
-        default:
-            break;
+    switch (ptr->userInput)
+    {
+    case 'a':
+    case 'A':
+        ptr->vehicleState = RUNNING;
+        stateAction();
+        break;
+    case 'b':
+    case 'B':
+        ptr->vehicleState = OFF;
+        stateAction();
+        break;
+    case 'c':
+    case 'C':
+        printf("System is Shutting down..\n");
+        break;
+    default:
+        break;
     }
 }
 
-void sensorsMenu() {
-    do {
+/**
+ * @brief Displays the sensors menu and handles user input for sensor-related actions.
+ *
+ * The sensor menu allows the user to perform various actions related to the vehicle's sensors.
+ */
+void sensorsMenu()
+{
+    do
+    {
+        printf("\n");
         printf("a. Turn off the engine\n");
         printf("b. Set traffic light color\n");
-        printf("c. Set the room Temp\n");
-        #if WITH_ENGINE_TEMP_CONTROLLER
+        printf("c. Set the room Temp\n\n");
+#if WITH_ENGINE_TEMP_CONTROLLER
         printf("d. Set the engine Temp\n\n");
-        #endif
+#endif
 
-        while (1) {
+        while (1)
+        {
             printf("Enter your choice: ");
-            scanf(" %c", &systemState.sensorsInput);
+            scanf(" %c", &ptr->sensorsInput);
 
-            if (systemState.sensorsInput == 'a' || systemState.sensorsInput == 'A' ||
-                systemState.sensorsInput == 'b' || systemState.sensorsInput == 'B' ||
-                systemState.sensorsInput == 'c' || systemState.sensorsInput == 'C' 
-                #if WITH_ENGINE_TEMP_CONTROLLER
-                || systemState.sensorsInput == 'd' || systemState.sensorsInput == 'D'
-                #endif
-                ) {
+            if (ptr->sensorsInput == 'a' || ptr->sensorsInput == 'A' ||
+                ptr->sensorsInput == 'b' || ptr->sensorsInput == 'B' ||
+                ptr->sensorsInput == 'c' || ptr->sensorsInput == 'C'
+#if WITH_ENGINE_TEMP_CONTROLLER
+                || ptr->sensorsInput == 'd' || ptr->sensorsInput == 'D'
+#endif
+            )
+            {
                 break;
-            } else {
+            }
+            else
+            {
                 printf("Invalid option. Please enter a valid option.\n");
             }
         }
 
-        switch (systemState.sensorsInput) {
-            case 'a':
-            case 'A':
-                systemState.vehicleState = OFF;
-                stateAction();
-                break;
-            case 'b':
-            case 'B':
-                systemState.color = setTraffic();
-                sensorsVal();
-                break;
-            case 'c':
-            case 'C':
-                systemState.AC_State = setTemp_AC();
-                sensorsVal();
-                break;
-            #if WITH_ENGINE_TEMP_CONTROLLER
-            case 'd':
-            case 'D':
-                systemState.EC_State = setTemp_EC();
-                sensorsVal();
-                break;
-            #endif
-            default:
-                break;
+        switch (ptr->sensorsInput)
+        {
+        case 'a':
+        case 'A':
+            ptr->vehicleState = OFF;
+            stateAction();
+            break;
+        case 'b':
+        case 'B':
+            ptr->color = setTraffic();
+            sensorsVal();
+            break;
+        case 'c':
+        case 'C':
+            ptr->AC_State = setTemp_AC();
+            sensorsVal();
+            break;
+#if WITH_ENGINE_TEMP_CONTROLLER
+        case 'd':
+        case 'D':
+            ptr->EC_State = setTemp_EC();
+            sensorsVal();
+            break;
+#endif
+        default:
+            break;
         }
 
-    } while (systemState.userInput != 'c' && systemState.userInput != 'C');
+    } while (ptr->userInput != 'c' && ptr->userInput != 'C');
 }
 
-void sensorsVal() {
+/**
+ * @brief Displays sensor values based on the system state.
+ *
+ * The sensor values include the vehicle's engine status, speed, AC status, and room/engine temperatures.
+ */
+void sensorsVal()
+{
     funPTR speedPTR;
     speedPTR = speedControl;
-    
-    if (speedPTR(&systemState.color) == 30) {
-        if (systemState.AC_State == OFF) {
-            systemState.AC_State = RUNNING;
-            systemState.roomTemp = (float)systemState.roomTemp * (5.0 / 4) + 1;
+
+    if (speedPTR(ptr->color) == 30)
+    {
+        if (ptr->AC_State == OFF)
+        {
+            ptr->AC_State = RUNNING;
+            ptr->roomTemp = (float)ptr->roomTemp * (5.0 / 4) + 1;
         }
-        #if WITH_ENGINE_TEMP_CONTROLLER
-        if (systemState.EC_State == OFF) {
-            systemState.EC_State = RUNNING;
-            systemState.engineTemp = (float)systemState.engineTemp * (5.0 / 4) + 1;
+#if WITH_ENGINE_TEMP_CONTROLLER
+        if (ptr->EC_State == OFF)
+        {
+            ptr->EC_State = RUNNING;
+            ptr->engineTemp = (float)ptr->engineTemp * (5.0 / 4) + 1;
         }
-        #endif
+#endif
     }
-    
-    if (systemState.vehicleState) {
+
+    if (ptr->vehicleState)
+    {
         printf("Vehicle Engine Status : ON \n");
-    } else {
+    }
+    else
+    {
         printf("Vehicle Engine Status : OFF \n");
     }
 
-    printf("Vehicle Speed : %d Km/Hr\n", speedControl(&systemState.color));
+    printf("Vehicle Speed : %d Km/Hr\n", speedControl(ptr->color));
 
-    if (systemState.AC_State) {
+    if (ptr->AC_State)
+    {
         printf("AC status : ON\n");
-    } else {
+    }
+    else
+    {
         printf("AC status : OFF\n");
     }
 
-    printf("Vehicle Room Temp : %0.2f C \n", (float)systemState.roomTemp);
+    printf("Vehicle Room Temp : %0.2f C \n", (float)ptr->roomTemp);
 #if WITH_ENGINE_TEMP_CONTROLLER
-    if (systemState.EC_State) {
+    if (ptr->EC_State)
+    {
         printf("EC status : ON\n");
-    } else {
+    }
+    else
+    {
         printf("EC status : OFF\n");
     }
 
-    printf("Vehicle Engine Temp : %0.2f C \n\n", (float)systemState.engineTemp);
+    printf("Vehicle Engine Temp : %0.2f C \n\n", (float)ptr->engineTemp);
 #endif
 }
 
-void stateAction() {
-    if (systemState.vehicleState == OFF) {
+/**
+ * @brief Performs actions based on the system state.
+ *
+ * Actions include displaying messages about the vehicle engine status and navigating to the appropriate menu.
+ */
+void stateAction()
+{
+    if (ptr->vehicleState == OFF)
+    {
         printf("Vehicle engine is OFF\n\n");
         mainMenu();
-    } else if (systemState.vehicleState == RUNNING) {
+    }
+    else if (ptr->vehicleState == RUNNING)
+    {
         printf("Vehicle engine is RUNNING\n\n");
         sensorsMenu();
     }
 }
 
-char speedControl(Traffic *color) {
+/**
+ * @brief Determine the speed of the vehicle based on the traffic light color.
+ * @param color
+ * @return vehicleSpeed
+ */
+char speedControl(Traffic color)
+{
     unsigned char vehicleSpeed = 0;
 
-    if (*color == GREEN) {
+    if (color == GREEN)
+    {
         vehicleSpeed = 100;
-    } else if (*color == ORANGE) {
+    }
+    else if (color == ORANGE)
+    {
         vehicleSpeed = 30;
-    } else if (*color == RED) {
+    }
+    else if (color == RED)
+    {
         vehicleSpeed = 0;
     }
 
     return vehicleSpeed;
 }
 
-Traffic setTraffic() {
+/**
+ * @brief Sets the traffic light color.
+ *
+ * User input is taken to set the traffic light color.
+ *
+ * @return Traffic light color.
+ */
+Traffic setTraffic()
+{
     Traffic color;
 
-    printf("Set Traffic Light\n");
+    printf("Set Traffic Light\n\n");
 
-    while (1) {
+    while (1)
+    {
         printf("Enter color: ");
-        scanf(" %c", &systemState.userInput);
+        scanf(" %c", &ptr->userInput);
 
-        if (systemState.userInput == 'g' || systemState.userInput == 'G' ||
-            systemState.userInput == 'o' || systemState.userInput == 'O' ||
-            systemState.userInput == 'R' || systemState.userInput == 'r') {
+        if (ptr->userInput == 'g' || ptr->userInput == 'G' ||
+            ptr->userInput == 'o' || ptr->userInput == 'O' ||
+            ptr->userInput == 'R' || ptr->userInput == 'r')
+        {
             break;
-        } else {
+        }
+        else
+        {
             printf("Invalid option. Please enter a valid option.\n");
         }
     }
 
-    switch (systemState.userInput) {
-        case 'g':
-        case 'G':
-            color = GREEN;
-            break;
-        case 'o':
-        case 'O':
-            color = ORANGE;
-            break;
-        case 'r':
-        case 'R':
-            color = RED;
-            break;
-        default:
-            break;
+    switch (ptr->userInput)
+    {
+    case 'g':
+    case 'G':
+        color = GREEN;
+        break;
+    case 'o':
+    case 'O':
+        color = ORANGE;
+        break;
+    case 'r':
+    case 'R':
+        color = RED;
+        break;
+    default:
+        break;
     }
 
     return color;
 }
 
-State setTemp_AC() {
+/**
+ * @brief Sets the room temperature and returns the state of the AC system.
+ *
+ * User input is taken to set the room temperature, and the AC system state is determined accordingly.
+ *
+ * @return AC system state.
+ */
+State setTemp_AC()
+{
     printf("Enter Vehicle Room Temperature: ");
-    scanf(" %d", &systemState.roomTemp);
+    scanf(" %d", &ptr->roomTemp);
     State AC_State = OFF;
 
-    if (systemState.roomTemp < 10 || systemState.roomTemp > 30) {
+    if (ptr->roomTemp < 10 || ptr->roomTemp > 30)
+    {
         AC_State = RUNNING;
-        systemState.roomTemp = 20;
-    } else {
+        ptr->roomTemp = 20;
+    }
+    else
+    {
         AC_State = OFF;
     }
 
@@ -233,15 +332,26 @@ State setTemp_AC() {
 
 #if WITH_ENGINE_TEMP_CONTROLLER
 
-State setTemp_EC() {
+/**
+ * @brief Sets the engine temperature and returns the state of the engine temperature controller.
+ *
+ * User input is taken to set the engine temperature, and the engine temperature controller state is determined accordingly.
+ *
+ * @return Engine temperature controller state.
+ */
+State setTemp_EC()
+{
     printf("Enter Vehicle Engine Temperature: ");
-    scanf(" %d", &systemState.engineTemp);
+    scanf(" %d", &ptr->engineTemp);
     State EC_State = OFF;
 
-    if (systemState.engineTemp < 100 || systemState.engineTemp > 150) {
+    if (ptr->engineTemp < 100 || ptr->engineTemp > 150)
+    {
         EC_State = RUNNING;
-        systemState.engineTemp = 125;
-    } else {
+        ptr->engineTemp = 125;
+    }
+    else
+    {
         EC_State = OFF;
     }
 
