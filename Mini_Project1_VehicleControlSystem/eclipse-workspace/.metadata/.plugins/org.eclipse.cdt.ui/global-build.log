@@ -1,0 +1,5 @@
+19:51:31 **** Rebuild of configuration Debug for project Vehicle Control System ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -o "Vehicle Control System.exe" main.o 
+Info: Nothing to build for Vehicle Control System

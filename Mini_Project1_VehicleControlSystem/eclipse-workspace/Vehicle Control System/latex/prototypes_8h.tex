@@ -1,0 +1,381 @@
+\doxysection{prototypes.\+h File Reference}
+\label{prototypes_8h}\index{prototypes.h@{prototypes.h}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=150pt]{prototypes_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ System\+State}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ W\+I\+T\+H\+\_\+\+E\+N\+G\+I\+N\+E\+\_\+\+T\+E\+M\+P\+\_\+\+C\+O\+N\+T\+R\+O\+L\+L\+ER}~1
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef char($\ast$ \textbf{ fun\+P\+TR}) (\textbf{ Traffic})
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ State} \{ \textbf{ O\+FF}, 
+\textbf{ R\+U\+N\+N\+I\+NG}
+ \}
+\item 
+enum \textbf{ Traffic} \{ \textbf{ R\+ED}, 
+\textbf{ O\+R\+A\+N\+GE}, 
+\textbf{ G\+R\+E\+EN}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ main\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Display the main menu and handle user input. \end{DoxyCompactList}\item 
+void \textbf{ sensors\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Display the sensors menu and handle user input for sensors. \end{DoxyCompactList}\item 
+void \textbf{ sensors\+Val} ()
+\begin{DoxyCompactList}\small\item\em Display sensor values based on the system state. \end{DoxyCompactList}\item 
+void \textbf{ state\+Action} ()
+\begin{DoxyCompactList}\small\item\em Perform actions based on the system state (e.\+g., turn on/off the engine). \end{DoxyCompactList}\item 
+\textbf{ Traffic} \textbf{ set\+Traffic} ()
+\begin{DoxyCompactList}\small\item\em Determine vehicle speed based on the traffic light color. \end{DoxyCompactList}\item 
+char \textbf{ speed\+Control} (\textbf{ Traffic} color)
+\begin{DoxyCompactList}\small\item\em Determine the speed of the vehicle based on the traffic light color. \end{DoxyCompactList}\item 
+\textbf{ State} \textbf{ set\+Temp\+\_\+\+AC} ()
+\begin{DoxyCompactList}\small\item\em Set the room temperature and return the state of the AC system. \end{DoxyCompactList}\item 
+\textbf{ State} \textbf{ set\+Temp\+\_\+\+EC} ()
+\begin{DoxyCompactList}\small\item\em Set the engine temperature and return the state of the engine temperature controller. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{prototypes_8h_a88d9579a814f200ce1c938dfe68fa939}} 
+\index{prototypes.h@{prototypes.h}!WITH\_ENGINE\_TEMP\_CONTROLLER@{WITH\_ENGINE\_TEMP\_CONTROLLER}}
+\index{WITH\_ENGINE\_TEMP\_CONTROLLER@{WITH\_ENGINE\_TEMP\_CONTROLLER}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{WITH\_ENGINE\_TEMP\_CONTROLLER}
+{\footnotesize\ttfamily \#define W\+I\+T\+H\+\_\+\+E\+N\+G\+I\+N\+E\+\_\+\+T\+E\+M\+P\+\_\+\+C\+O\+N\+T\+R\+O\+L\+L\+ER~1}
+
+
+
+Definition at line 4 of file prototypes.\+h.
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{prototypes_8h_a0b60215233d35716c5a905731fc8ceec}} 
+\index{prototypes.h@{prototypes.h}!funPTR@{funPTR}}
+\index{funPTR@{funPTR}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{funPTR}
+{\footnotesize\ttfamily typedef char($\ast$ fun\+P\+TR) (\textbf{ Traffic})}
+
+
+
+Definition at line 35 of file prototypes.\+h.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\label{prototypes_8h_a5d74787dedbc4e11c1ab15bf487e61f8}} 
+\index{prototypes.h@{prototypes.h}!State@{State}}
+\index{State@{State}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{State}
+{\footnotesize\ttfamily enum \textbf{ State}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OFF@{OFF}!prototypes.h@{prototypes.h}}\index{prototypes.h@{prototypes.h}!OFF@{OFF}}}\mbox{\label{prototypes_8h_a5d74787dedbc4e11c1ab15bf487e61f8aac132f2982b98bcaa3445e535a03ff75}} 
+O\+FF&Component is turned off. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RUNNING@{RUNNING}!prototypes.h@{prototypes.h}}\index{prototypes.h@{prototypes.h}!RUNNING@{RUNNING}}}\mbox{\label{prototypes_8h_a5d74787dedbc4e11c1ab15bf487e61f8a1061be6c3fb88d32829cba6f6b2be304}} 
+R\+U\+N\+N\+I\+NG&Component is running. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 7 of file prototypes.\+h.
+
+\mbox{\label{prototypes_8h_ad358054530f05e2055e439d04f7c293b}} 
+\index{prototypes.h@{prototypes.h}!Traffic@{Traffic}}
+\index{Traffic@{Traffic}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{Traffic}
+{\footnotesize\ttfamily enum \textbf{ Traffic}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RED@{RED}!prototypes.h@{prototypes.h}}\index{prototypes.h@{prototypes.h}!RED@{RED}}}\mbox{\label{prototypes_8h_ad358054530f05e2055e439d04f7c293baf80f9a890089d211842d59625e561f88}} 
+R\+ED&Red traffic light. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ORANGE@{ORANGE}!prototypes.h@{prototypes.h}}\index{prototypes.h@{prototypes.h}!ORANGE@{ORANGE}}}\mbox{\label{prototypes_8h_ad358054530f05e2055e439d04f7c293bace9ee4c1a6b777940c7f3a766a9a88d4}} 
+O\+R\+A\+N\+GE&Orange traffic light. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GREEN@{GREEN}!prototypes.h@{prototypes.h}}\index{prototypes.h@{prototypes.h}!GREEN@{GREEN}}}\mbox{\label{prototypes_8h_ad358054530f05e2055e439d04f7c293baa60bd322f93178d68184e30e162571ca}} 
+G\+R\+E\+EN&Green traffic light. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 12 of file prototypes.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{prototypes_8h_ab3002fe8e0074c9e2ecb5b835e5e819f}} 
+\index{prototypes.h@{prototypes.h}!mainMenu@{mainMenu}}
+\index{mainMenu@{mainMenu}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{mainMenu()}
+{\footnotesize\ttfamily void main\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Display the main menu and handle user input. 
+
+Display the main menu and handle user input.
+
+The main menu provides options to turn on/off the vehicle engine or quit the system. Upon user input, appropriate actions are taken. 
+
+Definition at line 50 of file main.\+c.
+
+
+
+References O\+FF, ptr, R\+U\+N\+N\+I\+NG, state\+Action(), System\+State\+::user\+Input, and System\+State\+::vehicle\+State.
+
+
+
+Referenced by main(), and state\+Action().
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{prototypes_8h_ab3002fe8e0074c9e2ecb5b835e5e819f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{prototypes_8h_a32371c9d181667ed4468527479b200b6}} 
+\index{prototypes.h@{prototypes.h}!sensorsMenu@{sensorsMenu}}
+\index{sensorsMenu@{sensorsMenu}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{sensorsMenu()}
+{\footnotesize\ttfamily void sensors\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Display the sensors menu and handle user input for sensors. 
+
+Display the sensors menu and handle user input for sensors.
+
+The sensor menu allows the user to perform various actions related to the vehicle\textquotesingle{}s sensors. 
+
+Definition at line 102 of file main.\+c.
+
+
+
+References System\+State\+::\+A\+C\+\_\+\+State, System\+State\+::color, System\+State\+::\+E\+C\+\_\+\+State, O\+FF, ptr, System\+State\+::sensors\+Input, sensors\+Val(), set\+Temp\+\_\+\+A\+C(), set\+Temp\+\_\+\+E\+C(), set\+Traffic(), state\+Action(), System\+State\+::user\+Input, System\+State\+::vehicle\+State, and W\+I\+T\+H\+\_\+\+E\+N\+G\+I\+N\+E\+\_\+\+T\+E\+M\+P\+\_\+\+C\+O\+N\+T\+R\+O\+L\+L\+ER.
+
+
+
+Referenced by state\+Action().
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{prototypes_8h_a32371c9d181667ed4468527479b200b6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{prototypes_8h_ac40dbc90d8db9b5e32b6862dda69fee4}} 
+\index{prototypes.h@{prototypes.h}!sensorsVal@{sensorsVal}}
+\index{sensorsVal@{sensorsVal}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{sensorsVal()}
+{\footnotesize\ttfamily void sensors\+Val (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Display sensor values based on the system state. 
+
+Display sensor values based on the system state.
+
+The sensor values include the vehicle\textquotesingle{}s engine status, speed, AC status, and room/engine temperatures. 
+
+Definition at line 175 of file main.\+c.
+
+
+
+References System\+State\+::\+A\+C\+\_\+\+State, System\+State\+::color, System\+State\+::\+E\+C\+\_\+\+State, System\+State\+::engine\+Temp, O\+FF, ptr, System\+State\+::room\+Temp, R\+U\+N\+N\+I\+NG, speed\+Control(), and System\+State\+::vehicle\+State.
+
+
+
+Referenced by sensors\+Menu().
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{prototypes_8h_ac40dbc90d8db9b5e32b6862dda69fee4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{prototypes_8h_a6f04bc68a4def1d7b022a02dfa844457}} 
+\index{prototypes.h@{prototypes.h}!setTemp\_AC@{setTemp\_AC}}
+\index{setTemp\_AC@{setTemp\_AC}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{setTemp\_AC()}
+{\footnotesize\ttfamily \textbf{ State} set\+Temp\+\_\+\+AC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set the room temperature and return the state of the AC system. 
+
+\begin{DoxyReturn}{Returns}
+AC system state.
+\end{DoxyReturn}
+Set the room temperature and return the state of the AC system.
+
+User input is taken to set the room temperature, and the AC system state is determined accordingly.
+
+\begin{DoxyReturn}{Returns}
+AC system state. 
+\end{DoxyReturn}
+
+
+Definition at line 344 of file main.\+c.
+
+
+
+References O\+FF, ptr, System\+State\+::room\+Temp, and R\+U\+N\+N\+I\+NG.
+
+
+
+Referenced by sensors\+Menu().
+
+\mbox{\label{prototypes_8h_a04ce8ce8148209d4f10241da04cd6edc}} 
+\index{prototypes.h@{prototypes.h}!setTemp\_EC@{setTemp\_EC}}
+\index{setTemp\_EC@{setTemp\_EC}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{setTemp\_EC()}
+{\footnotesize\ttfamily \textbf{ State} set\+Temp\+\_\+\+EC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set the engine temperature and return the state of the engine temperature controller. 
+
+\begin{DoxyReturn}{Returns}
+Engine temperature controller state.
+\end{DoxyReturn}
+Set the engine temperature and return the state of the engine temperature controller.
+
+User input is taken to set the engine temperature, and the engine temperature controller state is determined accordingly.
+
+\begin{DoxyReturn}{Returns}
+Engine temperature controller state. 
+\end{DoxyReturn}
+
+
+Definition at line 373 of file main.\+c.
+
+
+
+References System\+State\+::engine\+Temp, O\+FF, ptr, and R\+U\+N\+N\+I\+NG.
+
+
+
+Referenced by sensors\+Menu().
+
+\mbox{\label{prototypes_8h_a2899e6add29016990141654e259d3b2d}} 
+\index{prototypes.h@{prototypes.h}!setTraffic@{setTraffic}}
+\index{setTraffic@{setTraffic}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{setTraffic()}
+{\footnotesize\ttfamily \textbf{ Traffic} set\+Traffic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Determine vehicle speed based on the traffic light color. 
+
+\begin{DoxyReturn}{Returns}
+Traffic light color.
+\end{DoxyReturn}
+Determine vehicle speed based on the traffic light color.
+
+User input is taken to set the traffic light color.
+
+\begin{DoxyReturn}{Returns}
+Traffic light color. 
+\end{DoxyReturn}
+
+
+Definition at line 290 of file main.\+c.
+
+
+
+References G\+R\+E\+EN, O\+R\+A\+N\+GE, ptr, R\+ED, and System\+State\+::user\+Input.
+
+
+
+Referenced by sensors\+Menu().
+
+\mbox{\label{prototypes_8h_a439d8d8270a47e1fde0102011196e7b1}} 
+\index{prototypes.h@{prototypes.h}!speedControl@{speedControl}}
+\index{speedControl@{speedControl}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{speedControl()}
+{\footnotesize\ttfamily char speed\+Control (\begin{DoxyParamCaption}\item[{\textbf{ Traffic}}]{color }\end{DoxyParamCaption})}
+
+
+
+Determine the speed of the vehicle based on the traffic light color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vehicle\+Speed 
+\end{DoxyReturn}
+
+
+Definition at line 263 of file main.\+c.
+
+
+
+References G\+R\+E\+EN, O\+R\+A\+N\+GE, and R\+ED.
+
+
+
+Referenced by sensors\+Val().
+
+\mbox{\label{prototypes_8h_a11c9a3323292418091435cb4ddfd0165}} 
+\index{prototypes.h@{prototypes.h}!stateAction@{stateAction}}
+\index{stateAction@{stateAction}!prototypes.h@{prototypes.h}}
+\doxysubsubsection{stateAction()}
+{\footnotesize\ttfamily void state\+Action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Perform actions based on the system state (e.\+g., turn on/off the engine). 
+
+Perform actions based on the system state (e.\+g., turn on/off the engine).
+
+Actions include displaying messages about the vehicle engine status and navigating to the appropriate menu. 
+
+Definition at line 242 of file main.\+c.
+
+
+
+References main\+Menu(), O\+FF, ptr, R\+U\+N\+N\+I\+NG, sensors\+Menu(), and System\+State\+::vehicle\+State.
+
+
+
+Referenced by main\+Menu(), and sensors\+Menu().
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{prototypes_8h_a11c9a3323292418091435cb4ddfd0165_cgraph}
+\end{center}
+\end{figure}
