@@ -1,4 +1,0 @@
-<map id="sensorsVal" name="sensorsVal">
-<area shape="rect" id="node1" title="Displays sensor values based on the system state." alt="" coords="5,5,92,33"/>
-<area shape="rect" id="node2" href="$main_8c.html#a439d8d8270a47e1fde0102011196e7b1" title="Determine the speed of the vehicle based on the traffic light color." alt="" coords="140,5,237,33"/>
-</map>
