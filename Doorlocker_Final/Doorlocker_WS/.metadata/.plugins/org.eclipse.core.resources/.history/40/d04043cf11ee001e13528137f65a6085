@@ -1,0 +1,81 @@
+/*
+ * Module: Timer 1
+ *
+ * File Name: timer1.c
+ *
+ * Author: Mohamed Ismail
+*/
+
+#include "timer1.h"
+#include <avr/interrupt.h>
+#include<avr/io.h>
+
+
+/*
+ * Global pointer to function
+ */
+static volatile void(*g_callBackPtr)(void)=NULL_PTR;
+
+static uint8 counter=0;
+
+
+ISR(TIMER1_COMPA_vect)
+{
+	if(g_callBackPtr !=NULL_PTR)
+	{
+		(*g_callBackPtr)();
+	}
+}
+
+ISR(TIMER1_OVF_vect)
+{
+	if(g_callBackPtr != NULL_PTR)
+	{ 	(*g_callBackPtr)();
+		 counter=0;	}
+}
+
+/*
+ * Function to initialize the Timer driver
+*/
+void Timer1_init(const Timer1_ConfigType *Config_Ptr)
+{
+
+	//FOC1A & FOC1B for Non PWM mode
+	TCCR1A =(1<<FOC1A) | (1<<FOC1B);
+	// Prescaler bits are  CS10,CS11,CS12
+	TCCR1B =(TCCR1B& 0xF8)|(Config_Ptr->prescaler);
+	// Initial value to start counting from
+	TCNT1 = Config_Ptr->initial_value;
+
+	//For compare
+	if(Config_Ptr->mode == COMPARE)
+	{
+			OCR1A = Config_Ptr->compare_value;
+			// Timer1 Compare Interrupt
+			TIMSK = (1<<OCIE1A);
+			//WGM12 for compare mode WMG11:10 =0
+			TCCR1B |= (1<<WGM12);
+	}
+	//For Normal
+	else if(Config_Ptr->mode == NORMAL)
+	{
+			TIMSK =(1<<TOIE1);} // Turning on normal mode interrupt
+}
+void Timer1_deInit(void)
+{
+	//Clearing all timer registers
+	TCCR1A=0;
+	 TCCR1B=0;
+	TCNT1=0;
+	OCR1A=0;
+
+	// Clearing all 4 Interrupt enable bits
+	TIMSK &= (0xC3);
+	 counter=0;
+	g_callBackPtr = NULL_PTR;
+}
+
+void Timer1_setCallBack(void(*a_ptr)(void))
+{
+	g_callBackPtr = a_ptr;
+}

@@ -1,0 +1,49 @@
+/*
+ * Project: Door locker Security System
+ *
+ * File Name: CONTROL_ECU.c
+ *
+ * Description: Control ECU header file
+ *
+ * Author: Mohamed Ismail
+ *
+ */
+
+#ifndef APPLICATION_CONTROL_ECU_H_
+#define APPLICATION_CONTROL_ECU_H_
+
+#include"../HAL/BUZZER/buzzer.h"
+#include"../HAL/DC_MOTOR/motor.h"
+#include"../HAL/EEPROM/external_eeprom.h"
+#include"../MCAL/I2C/twi.h"
+#include"../MCAL/timer1/timer1.h"
+#include "../MCAL/UART/uart.h"
+
+#include"../LIBRARY/std_types.h"
+
+#define PASSWORD_SIZE            5
+
+typedef enum
+{
+	CW_sec=15,
+	CCW_sec=15,
+	IDLE_sec=3
+}Motor_DELAY;
+
+
+void ReceiveTwoPasswords(uint8 *password1, uint8 *password2);
+uint8 ComparePasswords(uint8 *password1, uint8 *password2,uint8 *matchedPassword);
+uint8 CompareSavedPassword(uint8 *password1, uint8 *matchedPassword);
+void EEPROM_write_Password(uint8 *Str);
+void EEPROM_read_Password(uint8 *Str);
+void ReceiveDoorPassword(uint8 *password1);
+void timer1_tick(void);
+void timer1_delay(uint8 seconds);
+void mainOpertaionsOptions(void);
+void IncorrectOptions(void);
+
+volatile uint8 timer1_Ticks = 0;
+volatile uint8 trial_flag = 3, exit_flag = 1;
+
+
+#endif /* APPLICATION_CONTROL_ECU_H_ */

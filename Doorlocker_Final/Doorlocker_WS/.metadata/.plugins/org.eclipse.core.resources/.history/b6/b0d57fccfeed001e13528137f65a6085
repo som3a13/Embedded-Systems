@@ -1,0 +1,38 @@
+/*
+ * Project: Door locker Security System
+ *
+ * File Name: HMI_ECU.h
+ *
+ * Description: Header file for HMI_ECU
+ *
+ * Author: Mohamed Ismail
+ */
+
+#ifndef APPLICATION_HMI_ECU_H_
+#define APPLICATION_HMI_ECU_H_
+
+#define PASS_LENGTH  5
+
+typedef enum
+{
+	CW_sec=15,
+	CCW_sec=15,
+	IDLE_sec=3
+}Motor_DELAY;
+
+
+tes;
+
+void getUserPass(uint8 *userPass);
+void confirmPass(uint8 *userPass);
+void SenduserPassUART(uint8 *userPass1);
+void send2pass_UART(uint8 *userPass1, uint8 *userPass2);
+void handleSystemMenu(uint8 *userPass);
+void doorLocker(void);
+void timer1_TickHandler(void);
+void delaySeconds(uint8 seconds);
+
+volatile uint8 timer1_Ticks = 0;
+volatile uint8 trial_flag = 3;
+
+#endif /* APPLICATION_HMI_ECU_H_ */

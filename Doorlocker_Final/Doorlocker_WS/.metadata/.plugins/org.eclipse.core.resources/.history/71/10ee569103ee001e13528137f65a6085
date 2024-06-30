@@ -1,0 +1,23 @@
+/*
+ * Module: PWM
+ *
+ * File Name: pwm.h
+ *
+ * Description: header file for PWM
+ *
+ * Author: Mohamed Ismail
+ *
+ */
+#ifndef MCAL_TIMER0_PWM_PWM_H_
+#define MCAL_TIMER0_PWM_PWM_H_
+
+#include "../../LIBRARY/std_types.h"
+#include "../GPIO/gpio.h"
+
+#define PWM_TIMER0_PORT_ID  PORTB_ID /*Configure PB3/OC0 as output pin --> pin where the PWM signal is generated from MC*/
+#define PWM_TIMER0_PIN_ID   PIN3_ID
+
+
+void PWM_Timer0_Start(uint8 duty_cycle);
+
+#endif /* MCAL_TIMER0_PWM_PWM_H_ */

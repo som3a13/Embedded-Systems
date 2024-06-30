@@ -1,0 +1,65 @@
+/*
+ * Module: I2C
+ *
+ * File Name: i2c.h
+ *
+ * Description: header file for the i2c driver
+ *
+ * Author: Mohamed Ismail
+ */
+#ifndef MCAL_I2C_TWI_H_
+#define MCAL_I2C_TWI_H_
+
+#include "../../inc/std_types.h"
+/*******************************************************************************
+ *                      Preprocessor Macros                                    *
+ *******************************************************************************/
+
+/* I2C Status Bits in the TWSR Register */
+#define TWI_START         0x08 /* start has been sent */
+#define TWI_REP_START     0x10 /* repeated start */
+#define TWI_MT_SLA_W_ACK  0x18 /* Master transmit ( slave address + Write request ) to slave + ACK received from slave. */
+#define TWI_MT_SLA_R_ACK  0x40 /* Master transmit ( slave address + Read request ) to slave + ACK received from slave. */
+#define TWI_MT_DATA_ACK   0x28 /* Master transmit data and ACK has been received from Slave. */
+#define TWI_MR_DATA_ACK   0x50 /* Master received data and send ACK to slave. */
+#define TWI_MR_DATA_NACK  0x58 /* Master received data but doesn't send ACK to slave. */
+
+
+/*
+ * Slave address are 7 bit space , Maximum nodes =128 so more addresses can be assigned
+ */
+typedef enum {
+    slave1_addr = 0x02, // address 0x01
+    slave2_addr = 0x04, // address 0x02
+    slave3_addr = 0x08, // address 0x03
+    slave4_addr = 0x10
+} TWI_Address;
+
+/*
+ * SCL=F_CPU/(16+2(TWBR)*4^TWPS)
+ * Prescaler/1  TWPS=0
+ * F_CPU = 8MHz
+ */
+typedef enum {
+	NORMAL_100KB = 0x20,
+	FAST_400KB = 0x02,       /*will be good for our MC*/
+
+} TWI_BaudRate;
+
+typedef struct {
+	TWI_Address address;
+//	uint8 address;
+	TWI_BaudRate bit_rate;
+} TWI_ConfigType;
+
+
+void TWI_init(const TWI_ConfigType *Config_Ptr);
+
+void TWI_start(void);
+void TWI_stop(void);
+void TWI_writeByte(uint8 data);
+uint8 TWI_readByteWithACK(void);
+uint8 TWI_readByteWithNACK(void);
+uint8 TWI_getStatus(void);
+
+#endif /* MCAL_I2C_TWI_H_ */

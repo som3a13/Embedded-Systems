@@ -1,0 +1,27 @@
+/*
+ * Module: PWM
+ *
+ * File Name: pwm.c
+ *
+ * Description: source file for PWM
+ *
+ * Author: Mohamed Ismail
+ *
+ */
+#include "../TIMER0_PWM/pwm.h"
+#include<avr/io.h>
+
+
+void PWM_Timer0_Start(uint8 duty_cycle) {
+
+	TCNT0 =0; // Set Timer Initial Value to 0
+	OCR0 =(uint8)(((uint16) duty_cycle*255)/(100));
+	GPIO_setupPinDirection(PWM_TIMER0_PORT_ID, PWM_TIMER0_PIN_ID, LOGIC_HIGH);
+	/* Configure Timer control register:
+	 * Fast PWM mode FOC0=0
+	 * Fast PWM Mode WGM01=1 & WGM00=1
+	 * Clear OC0 when match occurs (non inverted mode) COM00=0 & COM01=1
+	 * clock = F_CPU/8 CS00=0 CS01=1 CS02=0
+	 */
+	TCCR0 = (1 << WGM00) | (1 << WGM01) | (1 << COM01) | (1 << CS01);
+}
